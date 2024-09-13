@@ -339,6 +339,10 @@ impl HttpSession {
         self.get_header(name).map_or(b"", |v| v.as_bytes())
     }
 
+    pub fn reinit_body_reader(&mut self) {
+        self.body_reader.reinit();
+    }
+
     /// Read the request body. `Ok(None)` when there is no (more) body to read.
     pub async fn read_body_bytes(&mut self) -> Result<Option<Bytes>> {
         let read = self.read_body().await?;

@@ -157,6 +157,10 @@ impl HttpSession {
         &mut self.request_header
     }
 
+    pub fn reinit_body_reader(&mut self) {
+        // do nothing
+    }
+
     /// Read request body bytes. `None` when there is no more body to read.
     pub async fn read_body_bytes(&mut self) -> Result<Option<Bytes>> {
         // TODO: timeout

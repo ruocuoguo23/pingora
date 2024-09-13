@@ -99,6 +99,13 @@ impl Session {
         self.get_header(key).map_or(b"", |v| v.as_bytes())
     }
 
+    pub fn reinit(&mut self) {
+        match self {
+            Self::H1(s) => s.reinit_body_reader(),
+            Self::H2(s) => s.reinit_body_reader(),
+        }
+    }
+
     /// Read the request body. Ok(None) if no (more) body to read
     pub async fn read_request_body(&mut self) -> Result<Option<Bytes>> {
         match self {
